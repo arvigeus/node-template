@@ -1,0 +1,101 @@
+{
+  "name": "node-template",
+  "version": "0.1.0",
+  "author": "Nikolay Stoynov",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arvigeus/node-template.git"
+  },
+  "bugs": {
+    "url": "https://github.com/arvigeus/node-template/issues"
+  },
+  "engines": {
+    "node": ">=10.0.0",
+    "npm": ">=5.6.0"
+  },
+  "main": "src/index.js",
+  "scripts": {
+    "start": "rimraf ./dist && webpack --mode development",
+    "precommit": "lint-staged",
+    "lint": "eslint --ignore-path .gitignore ."
+  },
+  "lint-staged": {
+    "*.{js,json,graphql,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ],
+    "plugins": [
+      "transform-optional-chaining"
+    ]
+  },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "parserOptions": {
+      "ecmaVersion": 7
+    },
+    "extends": [
+      "node",
+      "esnext"
+    ],
+    "plugins": [
+      "import",
+      "babel"
+    ],
+    "rules": {
+      "import/no-nodejs-modules": "off",
+      "no-console": [
+        "error",
+        {
+          "allow": [
+            "warn",
+            "error",
+            "info"
+          ]
+        }
+      ],
+      "no-unused-vars": "warn"
+    },
+    "settings": {
+      "import/resolver": "webpack"
+    }
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.51",
+    "@babel/node": "^7.0.0-beta.51",
+    "@babel/polyfill": "^7.0.0-beta.51",
+    "@babel/preset-env": "^7.0.0-beta.51",
+    "babel-eslint": "^8.2.5",
+    "babel-loader": "^8.0.0-beta.4",
+    "babel-plugin-transform-optional-chaining": "^7.0.0-beta.3",
+    "dotenv-webpack": "^1.5.7",
+    "eslint": "^5.0.1",
+    "eslint-config-esnext": "^3.0.0",
+    "eslint-config-node": "^3.0.0",
+    "eslint-import-resolver-webpack": "^0.10.1",
+    "eslint-plugin-babel": "^5.1.0",
+    "eslint-plugin-import": "^2.13.0",
+    "flow-bin": "^0.75.0",
+    "husky": "^1.0.0-rc.9",
+    "lint-staged": "^7.2.0",
+    "nodemon-webpack-plugin": "^4.0.3",
+    "prettier": "^1.13.6",
+    "rimraf": "^2.6.2",
+    "webpack": "^4.12.2",
+    "webpack-bundle-analyzer": "^2.13.1",
+    "webpack-cli": "^3.0.8",
+    "webpack-node-externals": "^1.7.2"
+  }
+}
