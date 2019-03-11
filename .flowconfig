@@ -9,6 +9,7 @@ flow-typed
 [lints]
 
 [options]
+all=true
 esproposal.optional_chaining=enable
 
 [strict]
