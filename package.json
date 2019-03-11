@@ -18,10 +18,26 @@
   "scripts": {
     "start": "rimraf ./dist && webpack --mode development",
     "precommit": "lint-staged",
-    "lint": "eslint --ignore-path .gitignore ."
+    "fix:javascript": "prettier-eslint --write \"src/**/*.js\"",
+    "fix:files": "prettier --write \"src/**/*.{json,md,yaml,graphql}\"",
+    "fix": "run-s fix:javascript fix:files",
+    "lint:code": "eslint src",
+    "lint:types": "flow",
+    "lint": "run-s lint:code lint:types",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
-    "*.{js,json,graphql,md}": [
+    "*.js": [
+      "prettier-eslint --write",
+      "git add"
+    ],
+    "*.{json,md,yaml,graphql}": [
       "prettier --write",
       "git add"
     ]
@@ -35,67 +51,74 @@
             "node": "current"
           }
         }
-      ]
+      ],
+      "@babel/preset-flow"
     ],
     "plugins": [
-      "transform-optional-chaining"
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-proposal-optional-chaining"
     ]
   },
   "eslintConfig": {
+    "env": {
+      "jest": true,
+      "node": true
+    },
     "parser": "babel-eslint",
     "parserOptions": {
-      "ecmaVersion": 7
+      "ecmaVersion": 2018
     },
     "extends": [
-      "node",
-      "esnext"
+      "airbnb-base",
+      "plugin:prettier/recommended"
     ],
     "plugins": [
       "import",
       "babel"
     ],
-    "rules": {
-      "import/no-nodejs-modules": "off",
-      "no-console": [
-        "error",
-        {
-          "allow": [
-            "warn",
-            "error",
-            "info"
-          ]
-        }
-      ],
-      "no-unused-vars": "warn"
-    },
     "settings": {
       "import/resolver": "webpack"
     }
   },
+  "prettier": {},
+  "dependencies": {
+    "jest-extended": "0.11.1"
+  },
   "devDependencies": {
-    "@babel/core": "^7.3.4",
-    "@babel/node": "^7.2.2",
-    "@babel/polyfill": "^7.2.5",
-    "@babel/preset-env": "^7.3.4",
-    "babel-eslint": "^10.0.1",
-    "babel-loader": "^8.0.5",
-    "babel-plugin-transform-optional-chaining": "^7.0.0-beta.3",
-    "dotenv-webpack": "^1.7.0",
-    "eslint": "^5.15.1",
-    "eslint-config-esnext": "^4.0.0",
-    "eslint-config-node": "^4.0.0",
-    "eslint-import-resolver-webpack": "^0.11.0",
-    "eslint-plugin-babel": "^5.3.0",
-    "eslint-plugin-import": "^2.16.0",
-    "flow-bin": "^0.94.0",
-    "husky": "^1.3.1",
-    "lint-staged": "^8.1.5",
-    "nodemon-webpack-plugin": "^4.0.7",
-    "prettier": "^1.16.4",
-    "rimraf": "^2.6.3",
-    "webpack": "^4.29.6",
-    "webpack-bundle-analyzer": "^3.1.0",
-    "webpack-cli": "^3.2.3",
-    "webpack-node-externals": "^1.7.2"
+    "@babel/core": "7.3.4",
+    "@babel/node": "7.2.2",
+    "@babel/plugin-proposal-class-properties": "7.3.4",
+    "@babel/plugin-proposal-optional-chaining": "7.2.0",
+    "@babel/preset-env": "7.3.4",
+    "@babel/preset-flow": "7.0.0",
+    "@babel/polyfill": "7.2.5",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-eslint": "10.0.1",
+    "babel-jest": "24.3.1",
+    "babel-loader": "8.0.5",
+    "cross-env": "5.2.0",
+    "dotenv-webpack": "1.7.0",
+    "eslint": "5.15.1",
+    "eslint-config-airbnb-base": "13.1.0",
+    "eslint-config-prettier": "4.1.0",
+    "eslint-import-resolver-webpack": "0.11.0",
+    "eslint-plugin-babel": "5.3.0",
+    "eslint-plugin-import": "2.16.0",
+    "eslint-plugin-prettier": "3.0.1",
+    "flow-bin": "0.94.0",
+    "husky": "1.3.1",
+    "lint-staged": "8.1.5",
+    "jest": "24.3.1",
+    "node": "10.15.3",
+    "nodemon-webpack-plugin": "4.0.7",
+    "npm-run-all": "4.1.5",
+    "prettier": "1.16.4",
+    "prettier-eslint": "8.8.2",
+    "prettier-eslint-cli": "4.7.1",
+    "rimraf": "2.6.3",
+    "webpack": "4.29.6",
+    "webpack-bundle-analyzer": "3.1.0",
+    "webpack-cli": "3.2.3",
+    "webpack-node-externals": "1.7.2"
   }
 }

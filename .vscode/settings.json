@@ -1,7 +1,20 @@
 {
+  "flow.useNPMPackagedFlow": true,
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
+  "javascript.validate.enable": false,
   "prettier.eslintIntegration": true,
-  "prettier.stylelintIntegration": true,
-  "flow.useNPMPackagedFlow": true,
+  "files.exclude": {
+    "**/.git": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/.vscode": true,
+    "**/.cache": true,
+    "**/coverage": true,
+    "**/dist": true,
+    "**/flow-typed": true,
+    "**/package-lock.json": true,
+    "**/yarn.lock": true
+  }
 }
