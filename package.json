@@ -70,12 +70,24 @@
     },
     "extends": [
       "airbnb-base",
+      "prettier",
       "plugin:prettier/recommended"
     ],
     "plugins": [
+      "prettier",
       "import",
       "babel"
     ],
+    "rules": {
+      "func-names": "off",
+      "no-continue": "off",
+      "no-labels": "off",
+      "no-plusplus": "off",
+      "no-restricted-globals": "off",
+      "no-restricted-syntax": "off",
+      "no-unused-vars": "warn",
+      "prettier/prettier": "off"
+    },
     "settings": {
       "import/resolver": "webpack"
     }

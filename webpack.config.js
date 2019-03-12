@@ -1,6 +1,9 @@
 const path = require("path");
+// $FlowFixMe
 const NodemonPlugin = require("nodemon-webpack-plugin");
+// $FlowFixMe
 const nodeExternals = require("webpack-node-externals");
+// $FlowFixMe
 const Dotenv = require("dotenv-webpack");
 
 module.exports = {
